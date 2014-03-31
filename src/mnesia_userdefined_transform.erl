@@ -40,15 +40,19 @@ start() ->
 %% @doc 初始化数据库表
 init_db_table() ->
     %% 注意:为了测试方便,这里的attribute直接使用 [k,v]
+    io:format("create table db_test_transform~n"),
     mnesia:create_table(db_test_transform, [{disc_copies, [erlang:node()]}, {record_name, test}, {type, set}, {attributes, [k, v]}]).
 
 %% @doc 删除表
 delete_table() ->
+    io:format("delete table db_test_transform~n"),
     mnesia:delete_table(db_test_transform).
 
 %% @doc 随机插入一些数据
 insert_datas() ->
-    [begin mnesia:dirty_write(db_test_transform, #test{k=K, v=K}) end || K <- lists:seq(1, ?TEST_DATA_NUM)]. 
+    io:format("begin to insert test data ~p~n", [?TEST_DATA_NUM]),
+    [begin mnesia:dirty_write(db_test_transform, #test{k=K, v=K}) end || K <- lists:seq(1, ?TEST_DATA_NUM)],
+    io:format("finish insert test data~n").
 
 %% @doc mnesia自带的transform
 mnesia_transform() ->

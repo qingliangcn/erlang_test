@@ -1,0 +1,12 @@
+{application, erlang_test,
+ [
+  {description, "some erlang test code"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, {mnesia_userdefined_transform, []}},
+  {env, []}
+ ]}.
