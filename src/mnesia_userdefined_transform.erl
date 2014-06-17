@@ -67,7 +67,7 @@ userdefined_transform() ->
     {atomic, ok} = mnesia:transform_table(db_test_transform, ignore, [k, v, v2]),
     [begin
         case mnesia:dirty_read(db_test_transform, K) of
-            {test, K, V} ->
+            [{test, K, V}] ->
                 mnesia:dirty_write(db_test_transform, {test, K, V, 0});
             _ ->
                 ok
